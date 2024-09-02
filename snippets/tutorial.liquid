@@ -1,1 +1,254 @@
+{% comment %} 
 <p>Hello From tutorial.liquid</p>
+{% assign myVariable = 'Hello World' %}
+{{MyVariable}}
+
+{% assign myString = 'Hello world' %}
+{{ myString }}
+
+<br>
+
+{% comment %} Number {% endcomment %}
+ {% assign myNumber = 123 %}
+ {% assign myFloatingPoint = 12.3 %}
+
+ {{ myNumber }}, {{ myFloatingPoint }}
+
+ {% comment %} Boolean {% endcomment %}
+  {% assign myBoolean = true %}
+  {{ myBoolean }}
+
+  <br>
+  {% comment %} nil or null {% endcomment %}
+  {% assign myNill = null %}
+  {{ myNill }}
+
+  {% if undefinedVariable == null %}
+    <p>undefinedVariable is equal to nil</p>
+    {% endif %}
+
+    <br>
+    {% comment %} Array {% endcomment %}
+    {% for tag in product.tags %}
+        {{ tag }}
+        <br>
+        {% endfor %}
+
+        <br>
+        {% comment %} Object {% endcomment %}
+         <p>{{ product.title }}</p>
+
+         {% capture html %}
+        <div>
+            <p>Hello {{ product.title }}</p>
+        </div>
+        {% endcapture %}
+
+        {{ html.size }}
+
+    {% endcomment %}
+
+    {% comment %}  
+    {% assign myVariable = 11 %}
+
+    {% if myVariable > 10 %}
+        <p>Variable greater than 10</p>
+        <p>Another instruction</p>
+        {% assign myNestedVariable = 20 %}
+        <p> {{ myNestedVariable }}</p>
+        {% elseif myVariable > 5 %}
+        <p>Variable greater than 5</p>
+        {% elseif myVariable > 3 %}
+        <p>Variable greater then 3</p>
+        {% else %}
+        <p>Variable not greater than 10</p>
+            <p>{{ myNestedVariable }}</p>
+        {% endif %}
+        {% endcomment %}
+
+        {% assign myVarible = 5 %}
+        {% assign myString = "Hello" %}
+
+        {% if myVarible > 5 %}
+            <p>My variable is greater then 5</p>
+            {% endif %}
+
+            {% if myVarible < 5 %}
+                <p>My variable is less then 5</p>
+                {% endif %}
+
+                {% if myVarible == 5 %}
+                    <p>My variable is equal to 5</p>
+                    {% endif %}
+
+                    {% if myVarible >= 5 %}
+                        <p>My variable is greater then & eqaul to 5</p>
+                        {% endif %}
+
+                        {% if myVarible <= 5 %}
+                            <p>My variable is less then & eqaul to 5</p>
+                            {% endif %}
+
+                            {%if myString = "hello"%}
+                                <p>My string is hello</p>
+                                {%endif%}
+
+                                <p>{{ product.title }}</p>
+                                <p>{{ product.tags }}</p>
+
+                                {% if product.title contains 'Snowboard' %}
+                                    <p>This is a sbowboard</p>
+                                    {% endif %}
+
+                                    {% if product.tags contains 'Sportwinter' %}
+                                        <p>This is a winter prooduct</p>
+                                    {% endif %}
+
+                                    {% unless product.tag contains 'premium' %}
+                                        <p>This Product dosen't contain premium tag</p>   
+                                        {% else %}
+                                            <p>This product contains premium</p>                                     
+                                    {% endunless %}
+
+                {% if product.title contains 'Snowboard' or product.type == 'snowboard' and product.price < 6500 %}
+                    <p>This is an affordable snowboard</p>
+                    {% endif %}
+
+                    {% assign isASnowboard = false %}
+                    {% if product.title contains 'Snowboard' or product.type == 'snowboard' %}
+                        {% assign isASnowboard = true %}
+                        {% endif %}
+
+                        {% if isASnowboard and product.type < 70000 %}
+                            <p>This is an affordable snowboard</p>
+                            {% endif %}
+
+                            {% case product.type %}
+                            {% when 'snowboard' %}
+                                <p>This is a snowboard</p>
+                                {% when 'ski wax' %}
+                                    <p>This is a ski wax</p>
+                                    {% when 'gift card' %}
+                                        <p>This is gift card</p>
+                                        {%  else %}
+                                        <p>No known product type</p>
+                            {% endcase %}
+
+
+{% paginate collection.products by 5 %}
+    {% for product in collection.products %}
+        <p>{{ product.title }}</p>
+        {% endfor %}
+        {{ paginate | default_pagination }}
+    {% endpaginate %}
+
+    {% assign myNumber = 10 %}
+
+    {% comment %} {% assign myNewNumber = myNumber | plus: 5  %} {% endcomment %}
+    {% comment %} {% assign myNewNumber = myNumber | minus : 5 %} {% endcomment %}
+    {% comment %} {% assign myNewNumber = myNumber | times : 5 %} {% endcomment %}
+    {% comment %} {% assign myNewNumber = myNumber | devided_by: 5 %} {% endcomment %}
+
+    {% assign myNewNumber = myNumber | plus: 0 %}
+
+    {{ myNewNumber }}
+    {% if myNewNumber > 5 %}
+        <p>My number is greater then 5</p>
+        {% endif %}
+
+        {% assign moduloOfMyNumber = myNewNumber | modulo: 2 %}
+        {% if moduloOfMyNumber == 0 %}
+            <p>Even</p>
+            {% else %}
+            <p>Odd</p>
+            {% endif %}
+
+            {% assign myAbsNumber = -1 | abs %}
+            <p> {{ myAbsNumber }}</p>
+
+            {% assign myRoundedNumber = 10.4 | ceil %}
+            <p> {{ myRoundedNumber }}</p>
+
+            {% assign myCappedValue = 60 %}
+            <p>{{ myCappedValue |  at_least: 70  }}</p>
+
+            {% assign myString = " Hello World" %}
+            {% assign myotherString = 'Some extra text' %}
+            <p>{{ myString | downcase | append: myotherString | capitalize }}</p>
+
+            {% assign myStringWithWhiteSpace = 'Hello this has  whitespace  ' %}
+            <p>{{ myStringWithWhiteSpace | append: '!' }}</p>
+            <p>{{ myStringWithWhiteSpace | strip | append: '!' }}</p>
+
+            {% assign myHtmlText = "<p style="color:red">Hello some extra test included for testing the truncate</p> " %}
+            {{ myHtmlText |  strip_html }}
+
+            {% assign myLongString = "This is some very long text that will be trimmed" %}
+            <p>{{ myLongString |  truncate: 20 }}</p>
+
+            {{ myHtmlText |  strip_html |  truncate: 35 }}
+
+            {% assign myMultilineText = '
+            This is the first line
+            This is the second line
+            This is the third line
+            This is the Fourth line' |  newline_to_br %}
+
+            <p>{{ myMultilineText }}</p>
+
+            {% assign myText = "Hello some extra some extra text" %}
+            <p>{{ myText |  remove_first: 'extra' }}</p>
+
+            {% assign myNumber = '1,2,3,4' | split: ',' %}
+
+            {% assign myNumbers = 'html|orange,css|blue,javascript|yellow' |  split: ',' %}
+            {% for language in myNumbers %}
+                {% assign languageName = language | split: '|' |  first %}
+                {% assign languageColor = language | split: '|' |  last %}
+                <p style="color: {{ languageColor }}">{{ languageName }}</p>
+                {% endfor %}
+
+        {% assing products = collection.products %}
+        {% assign productTitles = products | map: 'title' %}
+
+        {% for productTitle in productTitles %} 
+        <p>{{ productTitle }}</p>
+        {% endfor %}
+
+        <p>{{ productTitles | join: '- ' }}</p>
+
+        <style>
+            .highlight{
+                background: yellow;
+            }
+        </style>
+
+        {{ shop.name }}
+        <p>{{ collection.description | default: 'This is a default description' }}</p>
+        <p>{{ 'This is some text with more text' |  highlight: 'text' }}</p>
+
+        <p>CopyRight {{ 'now' | date: '%y-%m-%d' }}</p>
+
+        {% assign backgroundColor = 'ff0000' %}
+        <div class="swatch" style="background: {{ backgroundColor | color_lighten: 20 }};"></div>
+
+        {% assign color1 = '#ff0000' %}
+        {% assign color2 = '#0000ff' %}
+
+        <div class="swatch" style="background: {{ color_mix: color2, 100 }}"></div>
+
+        {% assign color3= 'rgb(0, 255, 0)' | color_to_hex %}
+        <p>{{ color3 | color_to_hsl }}</p>
+
+        <div class="swatch" style="background: {{ color3 }}"></div>
+        <div class="swatch" style="background: #f3f3f3"></div>
+
+        <p>{{ '#ffffff' |  color_contrast: color: #000000 }}, {{ '#ffffff' |  color_contrast: color: #f3f3f3 }}</p>
+
+        {{ collection.products.first.featured_image | image_url: width: 500, height: 500 |  image_tag }}
+
+        <img src="{{ 'snowboard-image.jpg | asset_img_url: '500x500' }}" 
+        alt="snowboard"
+        loading="eager"
+        width="500"
+        height="500"/>

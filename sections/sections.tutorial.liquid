@@ -1,0 +1,106 @@
+<p>Hello World</p>
+
+<h2>Richtext Setting</h2>
+<p>{{ section.settings.richtext_setting }}</p>
+
+{% schema %}
+    {
+        "name": "Section Tutorials",
+        "tag": "section",
+        "class": "section - tutorials",
+        "limit": 2,
+        "settings": [
+            {
+                "type": "text",
+                "id": "text_settings",
+                "label": "Text Setting"
+            },
+            {
+                "type": "textarea",
+                "id": "textarea_setting",
+                "label": "Text area Setting",
+                "placeholder": "Input text Here"
+            },
+            {
+                "type": "richtext",
+                "id": "richtext_setting",
+                "label": "Richtext setting"               
+            },
+            {
+                "type": "inline_richtext",
+                "id": "inline_richtext_setting",
+                "label": "Inline richtext setting"
+            },
+            {
+                "type": "number",
+                "id": "number_setting",
+                "label": "Number Setting"
+            },
+            {
+                "type": "range",
+                "id": "range_setting",
+                "label": "Range setting",
+                "min": 50,
+                "max": 150,
+                "step": 10,
+                "unit": "px",
+                "default": 60
+            },
+            {
+                
+                "type": "select",
+                "id": "select_setting",
+                "label": "Select Setting",
+                "options": [
+                    {
+                        "value": "value_something_1",
+                        "label": "value 1"
+                    },
+                    {
+                        "value": "value_something_2",
+                        "label": "Value 2"
+                    },
+                    {
+                        "value": "value_something_3",
+                        "label": "value 3"
+                    },
+                    {
+                        "value": "value_something_4",
+                        "label": "value 4"
+                    }
+            ]
+            },
+            {
+                "type": "checkbox",
+                "label": "checkbox setting",
+                "id": "checkbox_setting",
+                "default": true
+            },
+            {
+                "type": "radio",
+                "id": "radio_setting",
+                "label": "Radio button setting",
+                "options": [
+                    {
+                        "value": "Value-1",
+                        "label": "Value 1"
+                    },
+                    {
+                        "value": "Value-2",
+                        "label": "Value 2"
+                    },
+                    {
+                        "value": "Value-3",
+                        "label": "Value 3"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "Section Tutorial",
+                "settings": {}
+            }
+        ]
+    }
+{% endschema %}
