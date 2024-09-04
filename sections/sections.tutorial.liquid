@@ -3,6 +3,102 @@
 <h2>Richtext Setting</h2>
 <p>{{ section.settings.richtext_setting }}</p>
 
+<h2>inline_richtext setting</h2>
+<p>{{ section.settings.inline_richtext_setting }}</p>
+
+<h2>Number Setting</h2>
+<p>{{ section.settings.number_setting }}</p>
+
+<h2>Range Setting</h2>
+<p>{{ section.settings.range_setting }}</p>
+
+<h2>Select Setting</h2>
+<p>{{ section.settings.select_setting }}</p>
+
+<h2>Checkbox Setting</h2>
+{% if section.settings.checkbox_setting == true %}
+    <p>Checkbox is true</p>
+    {% else %}
+    <p>Checkbox is false</p>
+    {% endif %}
+
+<h2>Radio Setting</h2>
+<p>{{ section.settings.radio_setting }}</p>
+
+<h2>Color Settings</h2>
+<p style="color:{{ section.settings.color_setting }} ">
+    {{ section.settings.color_setting }}, {{ section.settings.color_setting.lightness }}
+</p>
+
+<div style="background: {{ section.settings.color_background_setting }};">
+    <h2>Color Background Settings</h2>
+    <p>{{ section.settings.color_background_setting }}</p>
+</div>
+
+{% if section.settings.image_picker_setting %}
+    <h2>Image Picker Value</h2>
+    {{ section.settings.image_picker_setting | image_url: width: 400 |  image_tag: style: 'height:200px;|object-fit:cover;' }}
+    {% endif %}
+
+    <div>
+        <h2>Video Setting</h2>
+        <p>{{ section.settings.video_setting | video_tag: controls: true, style: 'height: 500px; width: 500px' }}</p>
+    </div>
+
+    <div>
+        <p>{{ section.settings.video_url_setting }}</p>
+    </div>
+
+    <h2>URl Setting</h2>
+    <p><a href="{{ section.settings.url_setting }}"></a></p>
+
+    <h2>HTML Setting</h2>
+    <p>{{ section.settings.html_setting }}</p>
+
+    <h2>Liquid Setting</h2>
+    <p>{{ section.settings.liquid_setting }}</p>
+
+    <h2>Product Setting</h2>
+    <p>{{ section.settings.product_setting }} | {{ section.settings.product_setting.title }} - {{ section.settings.product_setting.variants[0].price | money }}</p>
+
+    <h2>Product list Setting</h2>
+    {% for product in section.settings.product_list_setting %}
+        <p>{{ product }} | {{ product.title }} - {{ product.variants[0].price | money }}</p>
+        {% endfor %}
+
+        <h2>collection Setting</h2>
+    <p>{{ section.settings.collection_setting }} | {{ section.settings.collection_setting.title }} - {{ collection.products.size }} </p>
+
+    <h2>Collection list Setting</h2>
+    {% for collection in section.settings.collection_list_setting %}
+        <p>{{ collection.handle }} | {{ collection.title }} - {{ collection.products.size }}</p>
+        {% endfor %}
+
+        <h2>Page Setting</h2>
+        <p>{{ section.settings.page_setting }}</p>
+
+        <h2>Article Setting</h2>
+        <p>{{ section.settings.article_setting}}</p>
+        
+        <h2>Blog Setting</h2>
+        <p>{{ section.settings.blog_setting }}</p>
+
+        <h2>Linklist Setting</h2>
+        <p>{{ section.settings.link_list_setting.title }}</p>
+
+        <h2 style="text-align: {{ section.settings.text_alignment_setting }}">Text Allignment Center</h2>
+        <p style="text-align: {{ section.settings.text_alignment_setting }}">{{ section.settings.text_alignment_setting }}</p>
+
+        <h2>Font Setting</h2>
+        <p>Font Setting: {{ section.settings.font_picker_setting.family }}</p>
+
+        <style>
+            {{ section.settings.font_picker_setting | font_face: font_display: 'swap' }}
+            .scetion-tutorial * {
+                font-family: {{ section.settings.font_picker_setting }};
+            }
+        </style>
+
 {% schema %}
     {
         "name": "Section Tutorials",
@@ -94,6 +190,132 @@
                         "label": "Value 3"
                     }
                 ]
+            },
+            {
+                "type": "color",
+                "id": "color_setting",
+                "label": "color Setting"
+            },
+            {
+                "type": "color_background",
+                "id": "Color_background_setting",
+                "label": "Color Background setting"
+            },
+            {
+                "type": "image_picker",
+                "id": "image_picker_setting",
+                "label": "Image picker Setting"
+            },
+            {
+                "type": "video",
+                "id": "video_setting",
+                "label": "Video Setting"
+            },
+            {
+                "type": "video_url",
+                "id": "video_url_setting",
+                "label": "Video URL Setting",
+                "accept": ["youtube"]
+            },
+            {
+                "type": "url",
+                "id": "url_setting",
+                "label": "URL Setting"
+            },
+            {
+                "type": "html",
+                "id": "html_setting",
+                "label": "Html Setting"
+            },
+            {
+                "type": "liquid",
+                "id":  "liquid_setting",
+                "label": "Liquid Setting"
+            },
+            {
+                "type": "header",
+                "content": "Site Resource Settings",
+                "info": "Settings Realted to shopify Resources"
+            },
+            {
+                "type": "product",
+                "id": "product-setting",
+                "label": "Product Setting"
+            },
+            {
+                "type": "product_list",
+                "id": "product_list_setting",
+                "label": "Product list Setting",
+                "limit": 10
+            },
+            {
+                "type": "collection",
+                "id": "collection_setting",
+                "label": "Collection Setting"
+            },
+            {
+                "type": "collection_list",
+                "id": "collection_list_setting",
+                "label": "Collection List Setting",
+                "limit": 10
+            },
+            {
+                "type": "page",
+                "id": "page_setting",
+                "label": "Page Setting"
+            },
+            {
+                "type": "article",
+                "id": "article_setting",
+                "label": "Article Setting"
+            },
+            {
+                "type": "blog",
+                "id": "blog_setting",
+                "label": "Blog Setting"
+            },
+            {
+                "type": "link_list",
+                "id": "link_list_setting",
+                "label": "Link List Setting"
+            },
+            {
+                "type": "text_alignment",
+                "id": "text_alignment_setting",
+                "label": "Text alignment Setting",
+                "default": "center"
+            },
+            {
+                "type": "font_picker",
+                "id": "font_picker_setting",
+                "label": "Font Picker Setting",
+                "default": "assistant_n4"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "section_product",
+                "name": "Product",
+                "settings": [
+                    {
+                        "type": "product",
+                        "id": "product",
+                        "label": "Product"
+                    },
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Title",
+                        "info": "Optional will override the products title if defined"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "image",
+                        "label": "Image",
+                        "info": "Optional will override the products image if defined"
+                    }
+                ],
+                "limit": 4
             }
         ],
         "presets": [
