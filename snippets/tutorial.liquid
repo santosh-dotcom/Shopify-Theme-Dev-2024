@@ -1,10 +1,10 @@
 {% comment %} 
 <p>Hello From tutorial.liquid</p>
-{% assign myVariable = 'Hello World' %}
+{%- assign myVariable = 'Hello World' -%} - The two lines are remove the unwanted space form top & bottom
 {{MyVariable}}
 
-{% assign myString = 'Hello world' %}
-{{ myString }}
+{% assign myString = 'Hello world' %} - This {%  %} is uded to assign a variable
+{{ myString }} - This {{  }} is used to output a variable.
 
 <br>
 
@@ -135,12 +135,35 @@
                             {% endcase %}
 
 
+    {% for product in a collection.products %}
+        <p style="{% if forloop.first %} color: green {% elseif forloop.last %} color: orange {% endif %}">
+            {{ forloop.index0 }} - {{ product.title }}
+        </p>
+        {% if product.tags.size > 0 %}
+        <ul>
+            {% for tag in product.tags %}
+                <li> Product index: {{ forloop.parent.loop.index }} | Tag: {{ tag }}</li>
+                {% endfor %}
+        </ul>
+        {% endif %}
+        {% else %}
+        <p>This collection has no product</p>
+    {% endfor %}
+
+    {% for i in (11.15) %}
+        <p>hellow World {{ i }}, {{ forloop.index }}</p>
+        {% endfor %}
+
+        <p>{{ collection.products.size }}</p>
+
 {% paginate collection.products by 5 %}
     {% for product in collection.products %}
         <p>{{ product.title }}</p>
         {% endfor %}
         {{ paginate | default_pagination }}
     {% endpaginate %}
+
+//Filters
 
     {% assign myNumber = 10 %}
 
@@ -217,6 +240,40 @@
 
         <p>{{ productTitles | join: '- ' }}</p>
 
+        <p>{{ productTitles.first }}</p>
+        <p>{{ productTitles.last }}</p>
+        <p>{{ productTitles.size }}</p>
+
+        {% if productTitles.size > 5 %}
+            <p>Test</p>
+            {% endif %}
+
+        {% assign priceSortedItems = products | sort: 'price' %}
+        {% for product in priceSortedItems %}
+            <p>{{ product.title }} - {{ product.price | money }}</p>
+        {% endfor %}
+
+        {% assign allPrices = products | map: 'price' | sort %}
+        {% for price in allPrices %}
+            <p>{{ price | money }} </p>
+        {% endfor %}
+        
+        {%  assign sumOfPrices = allPrices | sum %}
+        <p>Total of all items: {{ sumOfPrices | money }}</p>
+
+        {% assign snowboard = products | where: 'title', 'The Complete snowboard' | first %}
+        {{ snowboard.title }} - {{ snowboard.price | money }}
+
+        {% for product in products %}
+            {% for tag in produt.tags %}
+                {% assign tags = tags | append: tag | append: ' ' %}
+            {% endfor %}
+            {% endfor %}
+
+            <p>{{ tags | split: ' ' | uniq | split: ' '}}</p>
+
+            {% collection.products.first | json %}
+
         <style>
             .highlight{
                 background: yellow;
@@ -252,3 +309,7 @@
         loading="eager"
         width="500"
         height="500"/>
+
+        {% comment  %} 
+        To run console on vs code: Shopify theme console or shopify theme console -url/collections/all  
+        {% endcomment %}

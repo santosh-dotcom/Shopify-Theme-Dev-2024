@@ -99,6 +99,69 @@
             }
         </style>
 
+{% assign products = section.blocks | where: "type", "section_product" %}
+{% assign collections = section.blocks | where: "type", "section_collection" %}
+
+<h2>Products</h2>
+
+{% for product in products %}
+    {% assign title = block.settings.title | default: block.settings.product.title %}
+    {% assign image = blocks.settings.image | default: blocks.settings.product.featured_image %}
+
+    <div> {{ block.shopify_attributes }}
+            {% if image %}
+                <div>
+                    {{ image | image_url: width: 300 | image_tag }}
+                </div>
+                {% endif %}
+                <p>{{ title }}</p>
+        </div>
+
+    {% endfor %}
+
+    <div>Some Other Content</div>
+
+    <h2>Collections</h2>
+
+    {% for collection in collections %}
+        {% assign title = block.settings.title | default: block.settings.collection.title %}
+        {% assign image = blocks.settings.image | default: blocks.settings.collection.featured_image %}
+    
+        <div> {{ block.shopify_attributes }}
+                {% if image %}
+                    <div>
+                        {{ image | image_url: width: 300 | image_tag }}
+                    </div>
+                    {% endif %}
+                    <p>{{ title }}</p>
+            </div>
+    
+        {% endfor %}
+
+{% comment%}{% for block in section.blocks %}
+    {% if block.type == 'section_collection' %}
+        {% assign title = block.settings.title | default: block.settings.collection.title %}
+        {% assign image = blocks.settings.image | default: blocks.settings.collection.featured_image %}
+        {% elseif block.type == 'section_product' %}
+        {% assign title = block.settings.title | default: block.settings.product.title %}
+        {% assign image = blocks.settings.image | default: blocks.settings.product.featured_image %}
+
+        {% endif %}
+
+        <div> {{ block.shopify_attributes }}
+            {% if image %}
+                <div>
+                    {{ image | image_url: width: 300 | image_tag }}
+                </div>
+                {% endif %}
+                <p>{{ title }}</p>
+        </div>
+        
+    {% endfor %}
+
+    {% endcomment %}
+
+
 {% schema %}
     {
         "name": "Section Tutorials",
@@ -318,6 +381,7 @@
                 "limit": 4
             }
         ],
+        
         "presets": [
             {
                 "name": "Section Tutorial",
