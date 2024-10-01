@@ -2,6 +2,8 @@
 {% comment %} 
 Render a first word  and a second word
 
+//shopify has deprecated the include
+
 Accepts:
 -Word: {string} the first word
 -secondword: {string} the second word
@@ -12,3 +14,5 @@ Usage:
 {% endcomment %}
 <p>This is Coming from snippet</p>
 <p>The word is {{ word }} and the second word is {{ second_word }}</p>
+
+{% comment %} <script src="{{ 'my-snippet-script.js' |  asset_url}}" async></script> {% endcomment %}
