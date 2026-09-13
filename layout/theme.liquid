@@ -300,7 +300,7 @@
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
     {% render 'tutorial' %}
-    {%  render 'my-snippet' { word: 'hello', second_word: 'word2'} %}  
+    {% render 'my-snippet', word: 'hello', second_word: 'word2' %}  
     <p>Hello World</p>
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
@@ -377,3 +377,13 @@
     {%- endif -%}
   </body>
 </html>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%  render 'my-snippet' { word: 'hello', second_word: 'word2'} %}"
+  to: "{% render 'my-snippet', word: 'hello', second_word: 'word2' %}"
+  position: 18331..18393
+{% endcomment %}
